@@ -6,7 +6,7 @@ import Info from './Info';
 const PatientPage: React.FC = () => {
   const [current, setCurrentToken] = useState<number | string | undefined>();
 
-  if(!!current) {
+  if(!current) {
     return <Form onSubmit={setCurrentToken} />;
   }
 
