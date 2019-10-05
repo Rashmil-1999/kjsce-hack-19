@@ -10,8 +10,12 @@ import Theme from './Theme';
 import BookingScreen from './screens/bookingScreen';
 import Login from './screens/authentication';
 import firebase from 'react-native-firebase';
+import MakeProfile from './screens/MakeProfile';
 
 const StackNavigator = createStackNavigator({
+  makeProf:{
+    screen: MakeProfile
+  },
   app:{
     screen:createBottomTabNavigator({
       home:{
@@ -57,6 +61,9 @@ const StackNavigator = createStackNavigator({
       },
     })
   },
+  login:{
+    screen:Login,
+  },
   bookingScreen:{
     screen:BookingScreen,
     navigationOptions:{
@@ -66,10 +73,10 @@ const StackNavigator = createStackNavigator({
 },{
   navigationOptions:{
     title:'DocsApp',
-    headerStyle:{
-      backgroundColor:Theme.highlightColor,
+    headerStyle:{      
+      backgroundColor:'white',
     },
-    headerTintColor:Theme.bgColor
+    headerTintColor:'black'
   }
 })
 export default class App extends Component {
