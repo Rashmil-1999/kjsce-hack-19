@@ -11,31 +11,44 @@ import {
   Col,
 } from 'reactstrap';
 
-// import styled from 'styled-components';
+import _ from 'lodash';
 
-const UserInfo: React.FC = () => {
+type UserDocType = {
+  name: string,
+  phone: string,
+  age: number,
+  weight: number,
+  height: number,
+  bloodGroup: string,
+  sex: string,
+};
+
+const UserInfo: React.FC<UserDocType> = (props) => {
   return (
     <Card>
-      <CardHeader className="border-0 text-center" tag="h1">Vikrant Gajria</CardHeader>
+      <CardHeader className="border-0 text-center" tag="h1">{props.name}</CardHeader>
       
       <CardBody tag={Container} fluid>
         <Row>
           <Col>
-            <b>19 years old</b>
+            <b>{props.age} years old</b>
           </Col>
           <Col>
-            Male
+            {_.capitalize(props.sex)}
+          </Col>
+          <Col>
+            +91{props.phone}
           </Col>
         </Row>
         <Row>
           <Col>
-            Height: 6 feet
+            Height: {props.height} cm
           </Col>
           <Col>
-            Weight: 190 lbs
+            Weight: {props.weight} kg
           </Col>
           <Col>
-            Blood Group: B+ve
+            Blood Group: {props.bloodGroup}ve
           </Col>
         </Row>
       </CardBody>

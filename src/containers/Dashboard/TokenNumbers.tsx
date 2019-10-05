@@ -7,9 +7,9 @@ import {
 
 import styled from 'styled-components';
 
-import { User } from 'firebase';
 import Token from '../../components/Token';
 import { useFirebase } from '../../util/firebase';
+import { useFirebaseUser } from '../../util/firebase/extras';
 
 const HorizonalScroll = styled.div`
   display: flex;
@@ -28,12 +28,10 @@ type TokenType = {
 
 const TokenNumbers: React.FC = () => {
   const firebase = useFirebase();
-  const [user, setUser] = useState<User>();
-  const [tokens, setTokens] = useState<TokenType[]>([]);
+  const user = useFirebaseUser();
 
-  firebase.auth().onAuthStateChanged((n: any) => {
-    setUser(n);
-  });
+  const [currentPeople, setCurrentPeople] = useState<string | null>(null);
+  const [tokens, setTokens] = useState<TokenType[]>([]);
 
   useEffect(() => {
     if(user) {
@@ -48,15 +46,32 @@ const TokenNumbers: React.FC = () => {
     }
   }, [user]);
 
+  useEffect(() => {
+    firebase.firestore()
+    .collection('Doctors')
+    .doc("hellorashmi")
+    .onSnapshot(doc => {
+      if(doc.exists) {
+        const x: any = doc.data();
+        setCurrentPeople(x.patientCount);
+      }
+    })
+  }, []);
+
   return (
     <>
-      <Col sm={3} className="border-right border-black">
+      <Col sm={4} className="border-right border-black d-flex align-items-center justify-content-around">
         <div className="d-flex flex-column align-items-center justify-content-center h-100">
           <h2>{tokens.length}</h2>
           <span>Tokens remaining</span>
         </div>
+        <div className="d-flex flex-column align-items-center justify-content-center h-100">
+          <h2>{currentPeople}</h2>
+          <span>People in waiting room</span>
+        </div>
       </Col>
-      <Col sm={9} className="px-0">
+
+      <Col sm={8} className="px-0">
         <Container fluid style={{
           maxHeight: '70vh',
           overflow: 'auto',
