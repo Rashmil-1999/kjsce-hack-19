@@ -5,8 +5,8 @@ import { Card, CardHeader, CardBody, Input, Button } from 'reactstrap';
 import { useInput } from '../../util';
 
 const LogInCard: React.FC = () => {
-  const phoneNumberInput = useInput(null);
-  const otpInput = useInput(null);
+  const phoneNumberInput = useInput();
+  const otpInput = useInput();
 
   return (
     <Card>
