@@ -1,6 +1,6 @@
 import { useState, ChangeEvent } from 'react';
 
-export function useInput(def: string | null) {
+export function useInput(def?: string) {
   const [state, setState] = useState(def);
 
   return {

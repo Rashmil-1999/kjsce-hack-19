@@ -5,11 +5,11 @@ import { Card, CardHeader, CardBody, Input, Button } from "reactstrap";
 import { useInput } from "../../util";
 
 const SignUpCard = () => {
-  const nameInput = useInput(null);
-  const phoneNumberInput = useInput(null);
-  const specialityInput = useInput(null);
-  const experienceInput = useInput(null);
-  const addressInput = useInput(null);
+  const nameInput = useInput();
+  const phoneNumberInput = useInput();
+  const specialityInput = useInput();
+  const experienceInput = useInput();
+  const addressInput = useInput();
 
   return (
     <Card className="w-50">
