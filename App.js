@@ -7,6 +7,7 @@ import Appointments from './screens/appointments';
 import Profile from './screens/profile';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import Theme from './Theme';
+
 const StackNavigator = createStackNavigator({
   app:{
     screen:createBottomTabNavigator({
