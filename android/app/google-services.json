@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "367209830613",
+    "firebase_url": "https://doctor-493ce.firebaseio.com",
+    "project_id": "doctor-493ce",
+    "storage_bucket": "doctor-493ce.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:367209830613:android:a72310b868ecef603eaa5c",
+        "android_client_info": {
+          "package_name": "com.docsapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "367209830613-ii5qrhd0bqjtt27jgsq00c2oi07tsakk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAVTLaEukC5dq9PrgCyWCUxDfR9SDqIDhk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "367209830613-ii5qrhd0bqjtt27jgsq00c2oi07tsakk.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
