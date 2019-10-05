@@ -9,6 +9,7 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import Theme from './Theme';
 import BookingScreen from './screens/bookingScreen';
 import Login from './screens/authentication';
+
 const StackNavigator = createStackNavigator({
   login:{
     screen:Login,
