@@ -5179,6 +5179,13 @@ react-native-screens@^1.0.0-alpha.11:
   dependencies:
     debounce "^1.2.0"
 
+react-native-simple-animations@^0.2.1:
+  version "0.2.1"
+  resolved "https://registry.yarnpkg.com/react-native-simple-animations/-/react-native-simple-animations-0.2.1.tgz#6990a61c5ee6bfd107e8511cdbdedafeb918afad"
+  integrity sha512-xaK8jBsEJhYu1JyE/jvtsqshmL3l0Rji+zGoEKzVqsGYDQ4pTS7tnmRsUhlg+W4o+Z+FwaznsqU3lbWRaB51Xw==
+  dependencies:
+    prop-types "^15.7.2"
+
 react-native-tab-view@^0.0.77:
   version "0.0.77"
   resolved "https://registry.yarnpkg.com/react-native-tab-view/-/react-native-tab-view-0.0.77.tgz#11ceb8e7c23100d07e628dc151b57797524d00d4"

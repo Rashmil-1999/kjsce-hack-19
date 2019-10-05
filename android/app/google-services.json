@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "367209830613-bj6qlipn6e15cnnu6jh21fu8s3hq5pha.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.docsapp",
+            "certificate_hash": "5e8f16062ea3cd2c4a0d547876baa6f38cabf625"
+          }
+        },
+        {
           "client_id": "367209830613-ii5qrhd0bqjtt27jgsq00c2oi07tsakk.apps.googleusercontent.com",
           "client_type": 3
         }

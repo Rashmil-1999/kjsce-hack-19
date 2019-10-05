@@ -9,11 +9,9 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import Theme from './Theme';
 import BookingScreen from './screens/bookingScreen';
 import Login from './screens/authentication';
+import firebase from 'react-native-firebase';
 
 const StackNavigator = createStackNavigator({
-  login:{
-    screen:Login,
-  },
   app:{
     screen:createBottomTabNavigator({
       home:{
@@ -75,13 +73,29 @@ const StackNavigator = createStackNavigator({
   }
 })
 export default class App extends Component {
+  constructor(props){
+    super(props);
+    this.state = {
+      authenticated:false,
+    }
+  }
   componentDidMount() {
-    
+    this.authListener = firebase.auth().onAuthStateChanged((user)=>{
+      if(user){
+        this.setState({
+          authenticated:true,
+        })
+      }else{
+        this.setState({
+          authenticated:false,
+        })
+      }
+    })
   }
   render() {
     return (
       <View style={{flex: 1}}>
-       <StackNavigator/>
+       {this.state.authenticated?<StackNavigator/>:<Login/>}
       </View>
     );
   }

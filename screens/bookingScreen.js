@@ -8,8 +8,38 @@ import {
 } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import Theme from '../Theme';
+import firebase from 'react-native-firebase';
 export default class BookingScreen extends Component {
-  componentDidMount() {}
+    constructor(props){
+        super(props);
+        this.state = {
+            appointments:[],
+            symptoms:'',
+            currentToken:'',
+        }
+    }
+  componentDidMount() {
+    let today = new Date();
+    today.setHours(0);
+    today.setMinutes(0);
+    today.setSeconds(0);
+    firebase.firestore().collection('Appointments').where('docId','==',this.props.navigation.state.params.doctor.id).get().then((appointments)=>{
+        let appoints = appointments.docs.filter(a=>new Date(a.data().date.seconds*1000) >= today);
+        let currentUser = appointments.docs.filter(a=>a.data().attended == true).sort((o,b)=>o.data().tokenNo > b.data().tokenNo);
+        if(currentUser.length > 0){
+        this.setState({
+            currentToken:currentUser[0].data().tokenNo,
+        })
+    }else{
+        this.setState({
+            currentToken:0,
+        })
+    }
+        this.setState({
+            appointments:appoints,
+        })
+    })
+  }
   render() {
     return (
       <View style={{backgroundColor: Theme.bgColor, flex: 1}}>
@@ -22,8 +52,8 @@ export default class BookingScreen extends Component {
           }}>
           <Icon size={30} name="user-md" />
           <View style={{flex: 1, margin: 10}}>
-            <Text style={{fontWeight: 'bold'}}>Dr. Viren Patel</Text>
-            <Text style={{fontWeight: '100'}}>Cardiologist</Text>
+            <Text style={{fontWeight: 'bold'}}>{this.props.navigation.state.params.doctor.data().name}</Text>
+            <Text style={{fontWeight: '100'}}>{this.props.navigation.state.params.doctor.data().speciality}</Text>
           </View>
         </View>
         <View
@@ -42,7 +72,10 @@ export default class BookingScreen extends Component {
             <Icon size={20} name="graduation-cap" />
           </View>
           <Text style={{flex: 1, marginHorizontal: 10, fontSize: 12}}>
-            12 Years of Experiance
+          {`${new Date().getFullYear() -
+            new Date(
+              this.props.navigation.state.params.doctor.data().initialYear.seconds*1000,
+            ).getFullYear()} Years of Experiance`}
           </Text>
         </View>
         <View
@@ -61,7 +94,7 @@ export default class BookingScreen extends Component {
             <Icon size={20} name="map-marker" />
           </View>
           <Text style={{flex: 1, marginHorizontal: 10, fontSize: 12}}>
-            D.N. Nagar,Andheri West
+            {this.props.navigation.state.params.doctor.data().address}
           </Text>
         </View>
         <View
@@ -81,7 +114,7 @@ export default class BookingScreen extends Component {
             <Icon size={20} name="clock-o" />
           </View>
           <Text style={{flex: 1, marginHorizontal: 10, fontSize: 12}}>
-            8:00am - 9:00pm
+          {this.props.navigation.state.params.doctor.data().workingHours}
           </Text>
         </View>
         <View
@@ -95,13 +128,18 @@ export default class BookingScreen extends Component {
             borderRadius:10
           }}>
           <Text style={{fontSize: 18, color: Theme.highlightColor}}>
-            Current Token: 10
+            {`Current Token: ${this.state.currentToken}`}
           </Text>
           <Text style={{fontSize: 18, color: Theme.highlightColor}}>
-            Available Token: 21
+            {`Available Token: ${this.state.appointments.length+1}`}
           </Text>
         </View>
         <TextInput
+        onChangeText={(text)=>{
+            this.setState({
+                symptoms:text,
+            })
+        }}
         placeholder='Enter symptoms(If Any)'
         multiline={true}
           style={{
@@ -115,7 +153,18 @@ export default class BookingScreen extends Component {
             paddingHorizontal: 20,
             fontSize: 14,
           }}></TextInput>
-          <TouchableOpacity style={{marginHorizontal:20,height:50,backgroundColor:Theme.highlightColor,justifyContent:'center',alignItems:'center'}}>
+          <TouchableOpacity onPress={()=>{
+              firebase.firestore().collection('Appointments').add({
+                  docId:this.props.navigation.state.params.doctor.id,
+                  userId:firebase.auth().currentUser.uid,
+                  date:new Date(),
+                  tokenNo:this.state.appointments.length+1,
+                  attended:false,
+                  symptoms:this.state.symptoms
+              }).then(()=>{
+                  this.props.navigation.goBack();
+              })
+          }} style={{marginHorizontal:20,height:50,backgroundColor:Theme.highlightColor,justifyContent:'center',alignItems:'center'}}>
           <Text style={{color:Theme.bgColor}}>Book Now</Text>
           </TouchableOpacity>
       </View>
