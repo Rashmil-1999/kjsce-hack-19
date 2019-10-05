@@ -9,7 +9,7 @@ export default class Appointments extends Component {
 
     render() {
       return (
-        <View style={{flex: 1}}>
+        <View style={{flex: 1, backgroundColor: 'white'}}>
           <AppointmentItem data={{token: 12, drName: "Dr. Name", ongoingToken: 10, appntTime: "18:30"}}/>
           <AppointmentItem data={{token: 12, drName: "Dr. Name", ongoingToken: 10, appntTime: "18:30"}}/>
           <AppointmentItem data={{token: 12, drName: "Dr. Name", ongoingToken: 10, appntTime: "18:30"}}/>

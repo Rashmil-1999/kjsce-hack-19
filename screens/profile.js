@@ -8,65 +8,103 @@ import {
   Dimensions
 } from 'react-native';
 import Theme from '../Theme'
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 export default class Profile extends Component {
 
+
+  listItem = props => (
+    <View style={{backgroundColor: Theme.bgColor, elevation: 1, marginHorizontal: 10, marginVertical: 2}}>
+      <Icon
+        size={25}
+        name="arrow-right"
+        style={{position: 'absolute', right: 10, top: 10}}
+      />
+      <View
+        style={{
+          flexDirection: 'row',
+          marginVertical: 10,
+          marginHorizontal: 25,
+          alignItems: 'center',
+        }}>
+        <Icon size={30} name="user-md" />
+        <View style={{flex: 1, margin: 10}}>
+          <Text style={{fontWeight: 'bold'}}>{props.drName}</Text>
+          <Text style={{fontWeight: '100'}}>{props.expertise}</Text>
+        </View>
+      </View>      
+    </View>
+  );
+
   render() {
     return (
-      <View style={styles.container}>
+      <View style={{backgroundColor: 'white', flex: 1}}>
           <View style={styles.header}></View>
-          <Image style={styles.avatar} source={{uri: '../assets/joey.jpeg'}}/>
-          <View style={styles.body}>
-            <View style={styles.bodyContent}>
-              <Text style={styles.name}>Joey</Text>
-              <Text style={styles.info}>UX Designer / Mobile developer</Text>
-              <Text style={styles.description}>Lorem ipsum dolor sit amet, saepe sapientem eu nam. Qui ne assum electram expetendis, omittam deseruisse consequuntur ius an,</Text>
-              
-              <TouchableOpacity style={styles.buttonContainer}>
-                <Text>Prescription 1 by Dr. Drake Ramoray</Text>  
-              </TouchableOpacity>              
-              <TouchableOpacity style={styles.buttonContainer}>
-                <Text>Prescription 2 by Dr. Johnny Sins</Text> 
-              </TouchableOpacity>
-            </View>
-        </View>
+              <View style={{flexDirection: 'row', marginLeft: 20, margin: 15, marginTop: 20}}>
+                <Icon name={"heartbeat"} size={60} color={Theme.highlightColor}/>
+                <Text style={{fontSize: 40, fontWeight: 'bold', margin: 5}}>Joey</Text>
+              </View>
+              <View  style={{flexDirection: 'row'}}>
+                <View style={{flexDirection: 'column', margin: 10}}>
+                    <View style={{flexDirection: 'row', margin: 5, alignItems: 'center'}}>
+                      <Image source={require('../assets/age.png')} style={{width: 25, height: 25, color: Theme.highlightColor, margin: 5}} tintColor={Theme.highlightColor}/>
+                      <Text style= {{fontSize: 15}}>Age: 20</Text>
+                   </View> 
+                   <View style={{flexDirection: 'row', margin: 5, alignItems: 'center'}}>
+                      <Image source={require('../assets/weight-scale.png')} style={{width: 25, height: 25, color: Theme.highlightColor, margin: 5}} tintColor={Theme.highlightColor}/>
+                      <Text style= {{fontSize: 15}}>Weight: 20</Text>
+                   </View> 
+                   <View style={{flexDirection: 'row', margin: 5, alignItems: 'center'}}>
+                      <Image source={require('../assets/gender.png')} style={{width: 25, height: 25, color: Theme.highlightColor, margin: 5}} tintColor={Theme.highlightColor}/>
+                      <Text style= {{fontSize: 15}}>Sex: Karvalo</Text>
+                   </View>                
+                </View>
+                <View style={{flex: 1}}/>
+                <View style={{flexDirection: 'column', margin: 10}}>
+                <View style={{flexDirection: 'row', margin: 5, alignItems: 'center'}}>
+                      <Image source={require('../assets/height.png')} style={{width: 25, height: 25, color: Theme.highlightColor, margin: 5}} tintColor={Theme.highlightColor}/>
+                      <Text style= {{fontSize: 15}}>Height(in cm): 15</Text>
+                   </View>
+                   <View style={{flexDirection: 'row', margin: 5, alignItems: 'center'}}>
+                      <Image source={require('../assets/blood-test.png')} style={{width: 25, height: 25, color: Theme.highlightColor, margin: 5}} tintColor={Theme.highlightColor}/>
+                      <Text style= {{fontSize: 15}}>Blood Group: XXX-</Text>
+                   </View>                
+                </View>
+              </View>
+              <this.listItem drName={"Dr. Drake Ramoray"} expertise={"Psychic"}/>
+              <this.listItem drName={"Dr. Johnny Sins"} expertise={"Gynaecologist"}/>
       </View>
     );
   }
 }
 
 const styles = StyleSheet.create({
-  header:{
-    backgroundColor: Theme.highlightColor,
-    height:200,
-  },
   avatar: {
     width: 130,
     height: 130,
     borderRadius: 63,
     borderWidth: 4,
-    borderColor: "white",
-    marginBottom:10,
     alignSelf:'center',
-    position: 'absolute',
-    marginTop:130
+    marginTop:30
   },
   name:{
     fontSize:22,
     color:"#FFFFFF",
-    fontWeight:'600',
+    margin: 20,
+    fontWeight:'800',
   },
   body:{
-    marginTop:40,
+    marginTop:2,
   },
   bodyContent: {
     flex: 1,
     alignItems: 'center',
-    padding:30,
+    padding:10,
   },
   name:{
+    fontWeight: 'bold',
     fontSize:28,
-    color: "#696969",
+    color: 'black',
     fontWeight: "600"
   },
   info:{

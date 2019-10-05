@@ -9,10 +9,11 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import Theme from './Theme';
 import BookingScreen from './screens/bookingScreen';
 import Login from './screens/authentication';
+import MakeProfile from './screens/MakeProfile';
 
 const StackNavigator = createStackNavigator({
-  login:{
-    screen:Login,
+  makeProf:{
+    screen: MakeProfile
   },
   app:{
     screen:createBottomTabNavigator({
@@ -59,6 +60,9 @@ const StackNavigator = createStackNavigator({
       },
     })
   },
+  login:{
+    screen:Login,
+  },
   bookingScreen:{
     screen:BookingScreen,
     navigationOptions:{
@@ -68,10 +72,10 @@ const StackNavigator = createStackNavigator({
 },{
   navigationOptions:{
     title:'DocsApp',
-    headerStyle:{
-      backgroundColor:Theme.highlightColor,
+    headerStyle:{      
+      backgroundColor:'white',
     },
-    headerTintColor:Theme.bgColor
+    headerTintColor:'black'
   }
 })
 export default class App extends Component {
