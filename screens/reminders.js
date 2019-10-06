@@ -58,7 +58,8 @@ export default class Reminders extends Component {
 
         meds = sortedmeds.map((m)=>{
           console.log(m);
-          let doc = doctors.docs.find((d)=>d.id == m.docId);
+          let doc = doctors.docs.find((d)=>{console.log(String(d.id) == String(m.docId));return (String(d.id) == String(m.docId))});
+          console.log(doc);
           return {
             doctor:doc.data(),
             medicine:m
@@ -74,10 +75,12 @@ export default class Reminders extends Component {
     return (
       <View
         style={{
-          backgroundColor: this.needsToTakeNow(props.medicine.repeats)?'green':Theme.bgColor,
+          backgroundColor: Theme.bgColor,
           elevation: 5,
           margin: 10,
           borderRadius: 10,
+          borderWidth:3,
+          borderColor:this.needsToTakeNow(props.medicine.repeats)?'green':Theme.bgColor,
         }}>
         <View style={{flexDirection: 'row'}}>
           <Text
@@ -101,7 +104,7 @@ export default class Reminders extends Component {
           </Text>
         </View>
         <Text style={{marginHorizontal: 15}}>
-          {`ends: ${new Date(props.endDate.seconds * 1000).toLocaleDateString()}`}
+          {`ends: ${new Date(props.medicine.endDate.seconds * 1000).toLocaleDateString()}`}
         </Text>
         <View
           style={{

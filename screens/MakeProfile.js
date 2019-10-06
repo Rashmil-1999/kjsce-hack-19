@@ -12,8 +12,12 @@ import {
 import Theme from '../Theme'
 import firebase from 'react-native-firebase';
 
-export default class Profile extends Component {
-
+export default class MakeProfile extends Component {
+  static navigationOptions = ({navigation})=>{
+    return{
+      title:'Profile'
+    }
+  }
   constructor(props){
     super(props);
     this.data={
