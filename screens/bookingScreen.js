@@ -25,18 +25,12 @@ export default class BookingScreen extends Component {
     today.setHours(0);
     today.setMinutes(0);
     today.setSeconds(0);
-    firebase.firestore().collection('Appointments').where('docId','==',this.props.navigation.state.params.doctor.id).get().then((appointments)=>{
+    firebase.firestore().collection('Appointments').where('docId','==',this.props.navigation.state.params.doctor.id).get().then(async (appointments)=>{
         let appoints = appointments.docs.filter(a=>new Date(a.data().date.seconds*1000) >= today);
-        let currentUser = appointments.docs.filter(a=>a.data().attended == true).sort((o,b)=>o.data().tokenNo < b.data().tokenNo);
-        if(currentUser.length > 0){
+        let doc = await firebase.firestore().collection('Doctors').doc(this.props.navigation.state.params.doctor.id).get();
         this.setState({
-            currentToken:currentUser[0].data().tokenNo,
+            currentToken:doc.data().currentToken?doc.data().currentToken:0,
         })
-    }else{
-        this.setState({
-            currentToken:0,
-        })
-    }
         this.setState({
             appointments:appoints,
         })

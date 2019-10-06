@@ -13,9 +13,7 @@ import firebase from 'react-native-firebase';
 import MakeProfile from './screens/MakeProfile';
 
 const StackNavigator = createStackNavigator({
-  makeProf:{
-    screen: MakeProfile
-  },
+  
   app:{
     screen:createBottomTabNavigator({
       home:{
@@ -45,6 +43,7 @@ const StackNavigator = createStackNavigator({
           ),
         },
       },
+      
       profile:{
         screen:Profile,
         navigationOptions: {
@@ -61,10 +60,13 @@ const StackNavigator = createStackNavigator({
       },
     })
   },
+  
   login:{
     screen:Login,
   },
-  
+  makeProf:{
+    screen: MakeProfile
+  },
   bookingScreen:{
     screen:BookingScreen,
     navigationOptions:{

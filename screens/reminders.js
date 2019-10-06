@@ -22,17 +22,23 @@ export default class Reminders extends Component {
     }
   }
   componentDidMount() {
-    async ()=>{
+    this.a();
+  }
+  a = async ()=>{
     let doctors = await firebase.firestore().collection('Doctors').get();
     firebase
       .firestore()
-      .collection('Prescriptions')
+      .collection('Prescription')
       .where('userId', '==', firebase.auth().currentUser.uid)
       .get()
       .then(prescriptions => {
         let meds = [];
         prescriptions.forEach(p => {
-          meds.push(p.data().medicines);
+          meds = meds.concat(p.data().medicines).map((d)=>{
+            return {
+              ...d,docId:p.data().docId,
+            }
+          });
         });
         let today = new Date();
         today.setHours(0);
@@ -41,22 +47,34 @@ export default class Reminders extends Component {
         meds = meds.filter(
           m => new Date(m.endDate.seconds * 1000) > today,
         );
-        meds = meds.sort((m,n)=>this.needsToTakeNow(m.repeats));
-        meds = meds.map((m)=>{
+        let sortedmeds = [];
+        meds.forEach((m)=>{
+          if(this.needsToTakeNow(m.repeats)){
+            sortedmeds.unshift(m);
+          }else{
+            sortedmeds.push(m);
+          }
+        })
+
+        meds = sortedmeds.map((m)=>{
+          console.log(m);
           let doc = doctors.docs.find((d)=>d.id == m.docId);
           return {
-            ...doc,
-            ...m
+            doctor:doc.data(),
+            medicine:m
           }
+        })
+        this.setState({
+          medicines:meds,
         })
       });
     }
-  }
   listItem = props => {
+    console.log(props.repeats);
     return (
       <View
         style={{
-          backgroundColor: this.needsToTakeNow(props.repeats)?'green':Theme.bgColor,
+          backgroundColor: this.needsToTakeNow(props.medicine.repeats)?'green':Theme.bgColor,
           elevation: 5,
           margin: 10,
           borderRadius: 10,
@@ -70,7 +88,7 @@ export default class Reminders extends Component {
               fontSize: 18,
               flex: 1,
             }}>
-            {props.medicineName}
+            {props.medicine.name}
           </Text>
           <Text
             style={{
@@ -79,7 +97,7 @@ export default class Reminders extends Component {
               fontWeight: 'normal',
               fontSize: 14,
             }}>
-            {props.repeats}
+            {props.medicine.repeats}
           </Text>
         </View>
         <Text style={{marginHorizontal: 15}}>
@@ -94,12 +112,12 @@ export default class Reminders extends Component {
           }}>
           <Icon size={30} name="user-md" />
           <View style={{flex: 1, margin: 10}}>
-            <Text style={{fontWeight: 'bold'}}>{props.name}</Text>
-            <Text style={{fontWeight: '100'}}>{props.speciality}</Text>
+            <Text style={{fontWeight: 'bold'}}>{props.doctor.name}</Text>
+            <Text style={{fontWeight: '100'}}>{props.doctor.speciality}</Text>
           </View>
         </View>
         <Text style={{paddingLeft: 15, paddingVertical: 10}}>
-          {props.note}
+          {props.medicine.notes}
         </Text>
       </View>
     );
