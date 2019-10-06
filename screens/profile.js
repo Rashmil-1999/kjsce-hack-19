@@ -8,10 +8,23 @@ import {
   Dimensions
 } from 'react-native';
 import Theme from '../Theme'
+import firebase from 'react-native-firebase'
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 export default class Profile extends Component {
 
+  constructor(props){
+    super(props)
+    this.state = {
+      user: {
+        
+      }
+    }
+  }
+
+  componentDidMount(){
+
+  }
 
   listItem = props => (
     <View style={{backgroundColor: Theme.bgColor, elevation: 1, marginHorizontal: 10, marginVertical: 2}}>
@@ -39,34 +52,39 @@ export default class Profile extends Component {
   render() {
     return (
       <View style={{backgroundColor: 'white', flex: 1}}>
-              <View ></View>
               <View style={{flexDirection: 'row', marginLeft: 20, margin: 15, marginTop: 20}}>
                 <Icon name={"heartbeat"} size={60} color={Theme.highlightColor}/>
                 <Text style={{fontSize: 40, fontWeight: 'bold', margin: 5}}>Joey</Text>
+                <View style={{flex: 1}}/>
+                <TouchableOpacity onPress={() => {                  
+                  this.props.navigation.navigate("makeProf") 
+                }}>
+                <Icon name="pencil-square-o" size={25} style={{marginTop: 5, marginRight: 5}}/>
+                </TouchableOpacity>
               </View>
               <View  style={{flexDirection: 'row'}}>
                 <View style={{flexDirection: 'column', margin: 10}}>
                     <View style={{flexDirection: 'row', margin: 5, alignItems: 'center'}}>
-                      <Image source={require('../assets/age.png')} style={{width: 25, height: 25, color: Theme.highlightColor, margin: 5}} tintColor={Theme.highlightColor}/>
+                      <Image source={require('../assets/age.png')} style={{width: 25, height: 25, margin: 5}} tintColor={Theme.highlightColor}/>
                       <Text style= {{fontSize: 15}}>Age: 20</Text>
                    </View> 
                    <View style={{flexDirection: 'row', margin: 5, alignItems: 'center'}}>
-                      <Image source={require('../assets/weight-scale.png')} style={{width: 25, height: 25, color: Theme.highlightColor, margin: 5}} tintColor={Theme.highlightColor}/>
+                      <Image source={require('../assets/weight-scale.png')} style={{width: 25, height: 25, margin: 5}} tintColor={Theme.highlightColor}/>
                       <Text style= {{fontSize: 15}}>Weight: 20</Text>
                    </View> 
                    <View style={{flexDirection: 'row', margin: 5, alignItems: 'center'}}>
-                      <Image source={require('../assets/gender.png')} style={{width: 25, height: 25, color: Theme.highlightColor, margin: 5}} tintColor={Theme.highlightColor}/>
+                      <Image source={require('../assets/gender.png')} style={{width: 25, height: 25, margin: 5}} tintColor={Theme.highlightColor}/>
                       <Text style= {{fontSize: 15}}>Sex: Karvalo</Text>
                    </View>                
                 </View>
                 <View style={{flex: 1}}/>
                 <View style={{flexDirection: 'column', margin: 10}}>
                 <View style={{flexDirection: 'row', margin: 5, alignItems: 'center'}}>
-                      <Image source={require('../assets/height.png')} style={{width: 25, height: 25, color: Theme.highlightColor, margin: 5}} tintColor={Theme.highlightColor}/>
+                      <Image source={require('../assets/height.png')} style={{width: 25, height: 25, margin: 5}} tintColor={Theme.highlightColor}/>
                       <Text style= {{fontSize: 15}}>Height(in cm): 15</Text>
                    </View>
                    <View style={{flexDirection: 'row', margin: 5, alignItems: 'center'}}>
-                      <Image source={require('../assets/blood-test.png')} style={{width: 25, height: 25, color: Theme.highlightColor, margin: 5}} tintColor={Theme.highlightColor}/>
+                      <Image source={require('../assets/blood-test.png')} style={{width: 25, height: 25, margin: 5}} tintColor={Theme.highlightColor}/>
                       <Text style= {{fontSize: 15}}>Blood Group: XXX-</Text>
                    </View>                
                 </View>

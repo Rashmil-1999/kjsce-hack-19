@@ -13,9 +13,6 @@ import firebase from 'react-native-firebase';
 import MakeProfile from './screens/MakeProfile';
 
 const StackNavigator = createStackNavigator({
-  makeProf:{
-    screen: MakeProfile
-  },
   app:{
     screen:createBottomTabNavigator({
       home:{
@@ -60,6 +57,9 @@ const StackNavigator = createStackNavigator({
         activeTintColor: Theme.highlightColor,
       },
     })
+  },
+  makeProf:{
+    screen: MakeProfile
   },
   login:{
     screen:Login,
