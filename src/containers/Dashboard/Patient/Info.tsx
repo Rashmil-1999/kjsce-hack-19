@@ -52,14 +52,21 @@ const UserInfo: React.FC<UserInfoProps> = ({ currentPerson, reset }) => {
               setPrescriptions(res.docs.map(d => d.data()));
             });
 
-          const aData = appointment.docs.map(d => d.data()).sort((a: any, b: any) => a.date - b.date)[0];
+          const aDataSorted = appointment.docs
+              .map(d => d.data())
+              .map(o => {
+                let x = new Date(1970, 0, 1);
+                x.setSeconds(o.date.seconds);
+                o.date = x;
+                return o;
+              }).sort((a: any, b: any) => b.date - a.date);
           
           if(user) {
             firebase.firestore()
               .collection("Doctors")
               .doc(user.uid)
               .update({
-                currentToken: aData.tokenNo,
+                currentToken: aDataSorted[0].tokenNo,
               });
           }
         }
