@@ -1,8 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useCallback } from "react";
 
 import { useList, useToggle } from "react-use";
 import classnames from "classnames";
 import { useInput } from "../../util";
+import { useFirebase } from "../../util/firebase";
+import { useFirebaseUser } from "../../util/firebase/extras";
 
 import {
   Modal,
@@ -35,7 +37,7 @@ const searchClient = algoliasearch(
 
 type Medicine = {
   name: string;
-  time: string;
+  repeats: string;
   endDate?: Date;
   notes?: string;
 };
@@ -48,10 +50,10 @@ type ExtraAddMedicineModalProps = {
 
 const MedicineBox: React.FC<Medicine & { onRemove: () => void }> = ({
   name,
-  time
+  repeats
 }) => (
   <ListGroupItem>
-    {name} - {time}
+    {name} - {repeats}
   </ListGroupItem>
 );
 
@@ -82,10 +84,11 @@ const AddMedicineModal: React.FC<
   const onClick = () => {
     props.onAdd({
       name: medicine,
-      time: `${morning === true ? 1 : 0}${noon === true ? 1 : 0}${
+      repeats: `${morning === true ? 1 : 0}-${noon === true ? 1 : 0}-${
         evening === true ? 1 : 0
       }`,
-      notes: notes.value
+      notes: notes.value,
+      endDate: new Date(enddate.value || Date.now() + 30000),
     });
     if (props.toggle) {
       props.toggle();
@@ -93,7 +96,8 @@ const AddMedicineModal: React.FC<
   };
 
   const [medicine, setMedicine] = useState("-");
-  const notes = useInput();
+  const notes = useInput("");
+  const enddate = useInput();
 
   const [morning, mToggle] = useToggle(false);
   const [noon, nToggle] = useToggle(false);
@@ -140,10 +144,14 @@ const AddMedicineModal: React.FC<
             </Col>
           </Row>
         </FormGroup>
+
+        <Label>End date:</Label>
+        <Input type="date" {...enddate} />
+
         <Label for="exampleNumber">Notes:</Label>
         <Input
           {...notes}
-          type="text"
+          type="textarea"
           id="exampleNumber"
           placeholder="Please Enter Extra Notes Here"
         />
@@ -161,6 +169,8 @@ const AddMedicineModal: React.FC<
 
 const PrescriptionModal: React.FC<ModalProps> = props => {
   const [medicines, medActions] = useList<Medicine>([]);
+  const firebase = useFirebase();
+  const user = useFirebaseUser();
 
   const [isAddModalOpen, toggle] = useToggle(false);
 
@@ -169,9 +179,17 @@ const PrescriptionModal: React.FC<ModalProps> = props => {
     toggle();
   };
 
-  const onSubmit = () => {
-    alert(props.phone);
-  };
+  const onSubmit = useCallback(() => {
+    if(user) {
+      firebase.firestore()
+      .collection("Prescription")
+      .add({
+        DocId: user.phoneNumber,
+        UserId: "+91" + (props as any).patient.phone,
+        medicines,
+      });
+    }
+  }, [user, medicines]);
 
   return (
     <Modal {...props}>

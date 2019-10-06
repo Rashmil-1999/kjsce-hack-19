@@ -64,7 +64,7 @@ const UserInfo: React.FC<UserInfoProps> = ({ currentPerson }) => {
           </section>
         </Col>
       </Row>
-      <PrescriptionModal isOpen={fillPrescription} />
+      <PrescriptionModal patient={data as any} isOpen={fillPrescription} />
     </Container>
   );
 };
