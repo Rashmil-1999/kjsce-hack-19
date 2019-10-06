@@ -27,7 +27,9 @@ export default class Profile extends Component {
     }
   }
 
-  register = () => {console.log("Det: " + JSON.stringify(this.data))}
+  register = () => {
+
+  }
 
   render() {
     return (

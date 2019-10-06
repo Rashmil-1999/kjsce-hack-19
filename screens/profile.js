@@ -39,7 +39,7 @@ export default class Profile extends Component {
   render() {
     return (
       <View style={{backgroundColor: 'white', flex: 1}}>
-          <View style={styles.header}></View>
+              <View ></View>
               <View style={{flexDirection: 'row', marginLeft: 20, margin: 15, marginTop: 20}}>
                 <Icon name={"heartbeat"} size={60} color={Theme.highlightColor}/>
                 <Text style={{fontSize: 40, fontWeight: 'bold', margin: 5}}>Joey</Text>
