@@ -29,7 +29,7 @@ export default class Profile extends Component {
   }
 
   register = () => {
-    this.data = this.state.sex
+    this.data.sex = this.state.sex
     firebase.firestore().collection('Users').doc(firebase.auth().currentUser.phoneNumber).set(this.data).then(()=>{
       this.props.navigation.replace('app');
     });

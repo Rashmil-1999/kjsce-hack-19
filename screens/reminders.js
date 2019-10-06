@@ -23,7 +23,7 @@ export default class Reminders extends Component {
   }
   componentDidMount() {
     async ()=>{
-    await firebase.firestore().collection('Doctors').get();
+    let doctors = await firebase.firestore().collection('Doctors').get();
     firebase
       .firestore()
       .collection('Prescriptions')
@@ -43,7 +43,7 @@ export default class Reminders extends Component {
         );
         meds = meds.sort((m,n)=>this.needsToTakeNow(m.repeats));
         meds = meds.map((m)=>{
-          let doc = this.state.doctors.find((d)=>d.id == m.docId);
+          let doc = doctors.docs.find((d)=>d.id == m.docId);
           return {
             ...doc,
             ...m
