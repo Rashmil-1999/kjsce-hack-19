@@ -14,20 +14,20 @@ import Theme from '../Theme'
 export default class Profile extends Component {
 
   constructor(props){
-    super(props);    
+    super(props);
+    this.data={
+      name: "",
+      age: 0,
+      weight: 0.0,
+      height: 0.0,
+      sex: "Male"      
+    }
     this.state={
-      data:{
-        name: "",
-        age: 0,
-        weight: 0.0,
-        height: 0.0,
-        sex: "Male"      
-      },
       sex: "Male"
     }
   }
 
-  register = () => {console.log("Det: " + JSON.stringify(this.state.data))}
+  register = () => {console.log("Det: " + JSON.stringify(this.data))}
 
   render() {
     return (
@@ -35,17 +35,17 @@ export default class Profile extends Component {
           <View style={styles.header}></View>
               <View style={{flexDirection: 'row', marginTop: 20}}>
                 <TextInput placeholder="Please enter your name here" placeholderColor="grey" fontSize={20} 
-                  onChangeText={(val) => {this.state.data.name = val; console.log("Name: " + this.state.data.name)}}/>
+                  onChangeText={(val) => {this.data.name = val; console.log("Name: " + this.data.name)}}/>
               </View>
               <View  style={{flexDirection: 'row'}}>
                 <View style={{flexDirection: 'column', margin: 15, marginLeft: 50, width: Dimensions.get('screen').width/2.2}}>
                    <View style={{flexDirection: 'row', margin: 5, alignItems: 'center'}}>
                       <TextInput placeholder="Age" keyboardType={'numeric'} placeholderColor="grey" fontSize={17}
-                        onChangeText={(val) => this.state.data.age = val}/>
+                        onChangeText={(val) => this.data.age = val}/>
                    </View> 
                    <View style={{flexDirection: 'row', margin: 5, alignItems: 'center'}}>
                       <TextInput placeholder="Weight" keyboardType={'numeric'} placeholderColor="grey" fontSize={17}
-                        onChangeText={(val) => this.state.data.weight = val}/>
+                        onChangeText={(val) => this.data.weight = val}/>
                    </View> 
                    <View style={{flexDirection: 'row', margin: 5, alignItems: 'center'}}>                      
                         <Picker
@@ -63,11 +63,11 @@ export default class Profile extends Component {
                 <View style={{flexDirection: 'column', margin: 15, marginLeft: 18, width: Dimensions.get('screen').width/2.2}}>
                   <View style={{flexDirection: 'row', margin: 5, alignItems: 'center'}}>
                       <TextInput placeholder="Blood group" placeholderColor="grey" fontSize={17}
-                        onChangeText={(val) => this.state.data.bloodGroup = val}/>
+                        onChangeText={(val) => this.data.bloodGroup = val}/>
                    </View>
                    <View style={{flexDirection: 'row', margin: 5, alignItems: 'center'}}>
                       <TextInput placeholder="Height(in cm)" keyboardType={'numeric'} placeholderColor="grey" fontSize={17}
-                        onChangeText={(val) => this.state.data.height = val}/>
+                        onChangeText={(val) => this.data.height = val}/>
                    </View>                
                 </View>
               </View>
