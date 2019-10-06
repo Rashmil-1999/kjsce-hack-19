@@ -6,48 +6,79 @@ import {
   Image,
   TouchableOpacity,
   Dimensions,
+  Picker,
   TextInput
 } from 'react-native';
 import Theme from '../Theme'
-import Icon from 'react-native-vector-icons/FontAwesome';
 
 export default class Profile extends Component {
+
+  constructor(props){
+    super(props);    
+    this.state={
+      data:{
+        name: "",
+        age: 0,
+        weight: 0.0,
+        height: 0.0,
+        sex: "Male"      
+      },
+      sex: "Male"
+    }
+  }
+
+  register = () => {console.log("Det: " + JSON.stringify(this.state.data))}
+
   render() {
     return (
       <View style={{backgroundColor: 'white', flex: 1, alignItems: 'center'}}>
           <View style={styles.header}></View>
               <View style={{flexDirection: 'row', marginTop: 20}}>
-                <TextInput placeholder="Please enter your name here" placeholderColor="grey" fontSize={20}/>
+                <TextInput placeholder="Please enter your name here" placeholderColor="grey" fontSize={20} 
+                  onChangeText={(val) => {this.state.data.name = val; console.log("Name: " + this.state.data.name)}}/>
               </View>
               <View  style={{flexDirection: 'row'}}>
                 <View style={{flexDirection: 'column', margin: 15, marginLeft: 50, width: Dimensions.get('screen').width/2.2}}>
-                    <View style={{flexDirection: 'row', margin: 5, alignItems: 'center'}}>
-                      <TextInput placeholder="Age" placeholderColor="grey" fontSize={17}/>
+                   <View style={{flexDirection: 'row', margin: 5, alignItems: 'center'}}>
+                      <TextInput placeholder="Age" keyboardType={'numeric'} placeholderColor="grey" fontSize={17}
+                        onChangeText={(val) => this.state.data.age = val}/>
                    </View> 
                    <View style={{flexDirection: 'row', margin: 5, alignItems: 'center'}}>
-                      <TextInput placeholder="Weight" placeholderColor="grey" fontSize={17}/>
+                      <TextInput placeholder="Weight" keyboardType={'numeric'} placeholderColor="grey" fontSize={17}
+                        onChangeText={(val) => this.state.data.weight = val}/>
                    </View> 
-                   <View style={{flexDirection: 'row', margin: 5, alignItems: 'center'}}>
-                      <TextInput placeholder="Sex" placeholderColor="grey" fontSize={17}/>
+                   <View style={{flexDirection: 'row', margin: 5, alignItems: 'center'}}>                      
+                        <Picker
+                           selectedValue={this.state.sex}
+                           style={{height: 50, width: 200, color: 'dark-grey'}}
+                           onValueChange={(itemValue, itemIndex) =>
+                           this.setState({sex: itemValue})
+                        }>
+                          <Picker.Item label="Male" value="Male" />
+                          <Picker.Item label="Female" value="Female" />
+                          <Picker.Item label="Other" value="Other"/>
+                        </Picker>
                    </View>                
                 </View>
                 <View style={{flexDirection: 'column', margin: 15, marginLeft: 18, width: Dimensions.get('screen').width/2.2}}>
                   <View style={{flexDirection: 'row', margin: 5, alignItems: 'center'}}>
-                      <TextInput placeholder="Blood group" placeholderColor="grey" fontSize={17}/>
+                      <TextInput placeholder="Blood group" placeholderColor="grey" fontSize={17}
+                        onChangeText={(val) => this.state.data.bloodGroup = val}/>
                    </View>
                    <View style={{flexDirection: 'row', margin: 5, alignItems: 'center'}}>
-                      <TextInput placeholder="Height in cm" placeholderColor="grey" fontSize={17}/>
+                      <TextInput placeholder="Height(in cm)" keyboardType={'numeric'} placeholderColor="grey" fontSize={17}
+                        onChangeText={(val) => this.state.data.height = val}/>
                    </View>                
                 </View>
               </View>
-              <TouchableOpacity>
+              <TouchableOpacity onPress={() => this.register()}>
                 <View style={{backgroundColor: Theme.highlightColor, borderRadius: 12.5, 
                     width: Dimensions.get('screen').width/1.2, height: 50,
                     justifyContent: 'center', alignItems: 'center', marginTop: 20}}>
                   <Text style={{fontSize: 18, fontWeight: 'bold', color: 'white'}}>Register</Text>
                 </View>
               </TouchableOpacity>
-      </View>
+      </View>      
     );
   }
 }
