@@ -9,6 +9,7 @@ import {
 import Icon from 'react-native-vector-icons/FontAwesome';
 import Theme from '../Theme';
 import firebase from 'react-native-firebase';
+import DialogManager from '../DialogManager';
 export default class BookingScreen extends Component {
     constructor(props){
         super(props);
@@ -19,13 +20,14 @@ export default class BookingScreen extends Component {
         }
     }
   componentDidMount() {
+    let dialog = DialogManager.showProgressDialog('Fetching Information','Please wait...');
     let today = new Date();
     today.setHours(0);
     today.setMinutes(0);
     today.setSeconds(0);
     firebase.firestore().collection('Appointments').where('docId','==',this.props.navigation.state.params.doctor.id).get().then((appointments)=>{
         let appoints = appointments.docs.filter(a=>new Date(a.data().date.seconds*1000) >= today);
-        let currentUser = appointments.docs.filter(a=>a.data().attended == true).sort((o,b)=>o.data().tokenNo > b.data().tokenNo);
+        let currentUser = appointments.docs.filter(a=>a.data().attended == true).sort((o,b)=>o.data().tokenNo < b.data().tokenNo);
         if(currentUser.length > 0){
         this.setState({
             currentToken:currentUser[0].data().tokenNo,
@@ -39,6 +41,7 @@ export default class BookingScreen extends Component {
             appointments:appoints,
         })
     })
+    dialog.destroy();
   }
   render() {
     return (

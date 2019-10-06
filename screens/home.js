@@ -11,6 +11,7 @@ import {
 import Theme from '../Theme';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import firebase from 'react-native-firebase';
+import DialogManager from '../DialogManager';
 export default class Home extends Component {
   constructor(props) {
     super(props);
@@ -20,6 +21,7 @@ export default class Home extends Component {
     };
   }
   componentDidMount() {
+    let dialog = DialogManager.showProgressDialog('Fetching Information','Please wait...');
     firebase
       .firestore()
       .collection('Doctors')
@@ -29,6 +31,8 @@ export default class Home extends Component {
         this.setState({
           doctors: doctors.docs,
           searchResult:doctors.docs,
+        },()=>{
+          dialog.destroy();
         });
       });
   }
