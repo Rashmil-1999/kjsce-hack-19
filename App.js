@@ -60,7 +60,13 @@ const StackNavigator = createStackNavigator({
       },
     })
   },
+<<<<<<< HEAD
   
+=======
+  makeProf:{
+    screen: MakeProfile
+  },
+>>>>>>> 078f16539f8e3f8e4d0e9f456dfa7f358bb9f923
   login:{
     screen:Login,
   },
