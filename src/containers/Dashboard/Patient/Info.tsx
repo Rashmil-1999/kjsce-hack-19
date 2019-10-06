@@ -77,7 +77,7 @@ const UserInfo: React.FC<UserInfoProps> = ({ currentPerson, reset }) => {
       <Row>
         <Col className="d-flex flex-column align-items-center">
           <h3>Prescriptions</h3>
-          <section>
+          <section className="h-100 w-100 d-flex flex-wrap">
             {
               prescriptions && prescriptions.length > 0
               ? prescriptions.map((p: any) => <Prescription prescription={p} />)
