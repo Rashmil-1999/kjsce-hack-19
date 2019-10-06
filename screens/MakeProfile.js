@@ -10,6 +10,7 @@ import {
   TextInput
 } from 'react-native';
 import Theme from '../Theme'
+import firebase from 'react-native-firebase';
 
 export default class Profile extends Component {
 
@@ -28,7 +29,10 @@ export default class Profile extends Component {
   }
 
   register = () => {
-
+    this.data = this.state.sex
+    firebase.firestore().collection('Users').doc(firebase.auth().currentUser.phoneNumber).set(this.data).then(()=>{
+      this.props.navigation.replace('app');
+    });
   }
 
   render() {
@@ -77,7 +81,7 @@ export default class Profile extends Component {
                 <View style={{backgroundColor: Theme.highlightColor, borderRadius: 12.5, 
                     width: Dimensions.get('screen').width/1.2, height: 50,
                     justifyContent: 'center', alignItems: 'center', marginTop: 20}}>
-                  <Text style={{fontSize: 18, fontWeight: 'bold', color: 'white'}}>Register</Text>
+                  <Text style={{fontSize: 18, fontWeight: 'bold', color: 'white'}}>Save</Text>
                 </View>
               </TouchableOpacity>
       </View>      

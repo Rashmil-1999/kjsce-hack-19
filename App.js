@@ -64,6 +64,7 @@ const StackNavigator = createStackNavigator({
   login:{
     screen:Login,
   },
+  
   bookingScreen:{
     screen:BookingScreen,
     navigationOptions:{
