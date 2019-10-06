@@ -20,7 +20,6 @@ import {
   Label,
   Row,
   Col,
-  Container
 } from "reactstrap";
 
 import algoliasearch from "algoliasearch/lite";
@@ -181,12 +180,18 @@ const PrescriptionModal: React.FC<ModalProps> = props => {
 
   const onSubmit = useCallback(() => {
     if(user) {
+      const m = {
+        docId: user.uid,
+        userId: (props as any).patient.id,
+        medicines,
+        date: new Date(),
+      };
+
       firebase.firestore()
       .collection("Prescription")
-      .add({
-        docId: user.phoneNumber,
-        userId: "+91" + (props as any).patient.phone,
-        medicines,
+      .add(m)
+      .then(() => {
+        props.onDone();
       });
     }
   }, [user, medicines]);

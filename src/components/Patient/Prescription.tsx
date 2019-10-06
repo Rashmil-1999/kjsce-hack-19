@@ -1,6 +1,10 @@
-import React from 'react';
+import React, { useMemo } from 'react';
+
+import { useToggle } from 'react-use';
 
 import styled from 'styled-components';
+
+import PresInfo from './PresInfo';
 
 const PrescriptionContainer = styled.div`
   padding: 2rem;
@@ -16,13 +20,21 @@ const PrescriptionContainer = styled.div`
 `;
 
 type PrescriptionProps = {
-  onClick?: Function,
+  prescription?: any,
 };
 
-const Prescription: React.FC<PrescriptionProps> = ({ onClick }) => {
+const Prescription: React.FC<PrescriptionProps> = ({ prescription }) => {
+  const [info, toggle] = useToggle(false);
+  const title = useMemo(() => {
+    let x = new Date(1970, 0, 1);
+    x.setSeconds(prescription.date.seconds);
+    return x.toDateString();
+  }, [prescription.date]);
+
   return (
-    <PrescriptionContainer onClick={onClick as any}>
-      Hello World
+    <PrescriptionContainer onClick={toggle}>
+      {title}
+      <PresInfo isOpen={info} {...prescription} toggle={toggle} />
     </PrescriptionContainer>
   );
 };

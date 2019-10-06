@@ -11,7 +11,7 @@ const LogInPageContainer = styled.div`
 const LogInPage: React.FC = () => {
   return (
     <LogInPageContainer className="vw-100 vh-100 d-flex flex-column justify-content-center align-items-center">
-      <LogInCard />
+      <LogInCard testing/>
     </LogInPageContainer>
   );
 };

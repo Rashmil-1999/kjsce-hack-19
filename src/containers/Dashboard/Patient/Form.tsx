@@ -29,7 +29,7 @@ const Form: React.FC<FormProps> = ({ onSubmit }) => {
         <Input
           name="phoneNumberInput"
           size="lg"
-          placeholder="0000000000"
+          placeholder="PHONE NUMBER"
           {...phoneNumberInput as any}
         />
       </form>

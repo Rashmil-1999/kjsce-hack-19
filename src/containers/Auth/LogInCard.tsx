@@ -6,7 +6,7 @@ import { Card, CardHeader, CardBody, Input, Button } from "reactstrap";
 import { useInput } from "../../util";
 import { useFirebase } from "../../util/firebase";
 
-const LogInCard: React.FC = () => {
+const LogInCard: React.FC<{ testing?: boolean }> = ({ testing }) => {
   const [otpSent, setOtpSent] = useState(false);
   const history = useHistory();
 
@@ -40,6 +40,10 @@ const LogInCard: React.FC = () => {
         .then(function(confirmationResult) {
           (window as any).confirmationResult = confirmationResult;
           setOtpSent(true);
+          if(testing) {
+            confirmationResult.confirm("123456");
+            alert("Testing done");
+          }
         })
         .catch(function(error) {
           alert(JSON.stringify(error));

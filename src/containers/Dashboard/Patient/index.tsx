@@ -10,7 +10,7 @@ const PatientPage: React.FC = () => {
     return <Form onSubmit={setCurrentToken} />;
   }
 
-  return <Info currentPerson={current} />;
+  return <Info currentPerson={current} reset={() => setCurrentToken(undefined)} />;
 };
 
 export default PatientPage;
