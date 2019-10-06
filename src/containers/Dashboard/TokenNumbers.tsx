@@ -63,11 +63,11 @@ const TokenNumbers: React.FC = () => {
       <Col sm={4} className="border-right border-black d-flex align-items-center justify-content-around">
         <div className="d-flex flex-column align-items-center justify-content-center h-100">
           <h2>{tokens.length}</h2>
-          <span>Tokens remaining</span>
+          <span className="text-center">Tokens remaining</span>
         </div>
         <div className="d-flex flex-column align-items-center justify-content-center h-100">
           <h2>{currentPeople}</h2>
-          <span>People in waiting room</span>
+          <span className="text-center">People in waiting room</span>
         </div>
       </Col>
 

@@ -23,7 +23,12 @@ type UserDocType = {
   sex: string,
 };
 
-const UserInfo: React.FC<UserDocType> = (props) => {
+const UserInfo: React.FC<UserDocType & { onFillClick: () => void }> = (props) => {
+  const onClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    props.onFillClick();
+  };
+
   return (
     <Card>
       <CardHeader className="border-0 text-center" tag="h1">{props.name}</CardHeader>
@@ -54,7 +59,7 @@ const UserInfo: React.FC<UserDocType> = (props) => {
       </CardBody>
 
       <CardFooter tag="form" className="d-flex flex-column px-5">
-        <Button type="submit" color="info" size="lg">Fill Prescription</Button>
+        <Button type="submit" color="info" size="lg" onClick={onClick}>Fill Prescription</Button>
       </CardFooter>
     </Card>
   );

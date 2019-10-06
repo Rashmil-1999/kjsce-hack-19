@@ -10,13 +10,16 @@ const CardContainer = styled.div`
   color: white;
   font-size: 1.5rem;
   font-family: monospace;
+  display: flex;
+  flex-direction: column;
 `;
 
 type TokenProps = {
   number: number,
+  name?: string,
 };
 
-const Token: React.FC<TokenProps> = ({ number }) => {
+const Token: React.FC<TokenProps> = ({ number, name }) => {
   return (
     <CardContainer>
       {number}

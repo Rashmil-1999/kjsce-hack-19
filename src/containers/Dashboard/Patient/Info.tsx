@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
 
+import { useToggle } from 'react-use';
+
 import {
   Container,
   Row,
@@ -19,6 +21,7 @@ type UserInfoProps = {
 const UserInfo: React.FC<UserInfoProps> = ({ currentPerson }) => {
   const firebase = useFirebase();
   const [data, setData] = useState<object>();
+  const [fillPrescription, toggle] = useToggle(false);
 
   useEffect(() => {
     if(currentPerson) {
@@ -38,7 +41,7 @@ const UserInfo: React.FC<UserInfoProps> = ({ currentPerson }) => {
     <Container fluid>
       <Row>
         <Col>
-          <Patient {...data as any} />
+          <Patient {...data as any} onFillClick={toggle} />
         </Col>
       </Row>
       <Row>
@@ -61,7 +64,7 @@ const UserInfo: React.FC<UserInfoProps> = ({ currentPerson }) => {
           </section>
         </Col>
       </Row>
-      <PrescriptionModal />
+      <PrescriptionModal isOpen={fillPrescription} />
     </Container>
   );
 };
