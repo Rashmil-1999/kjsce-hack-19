@@ -2,12 +2,9 @@ import { useContext } from "react";
 import FirebaseContext from "./context";
 import Firebase from "./firebase";
 
-/**
- * @returns {firebase.app.App}
- */
 function useFirebase() {
     const firebase = useContext(FirebaseContext);
-    return firebase;
+    return firebase as firebase.app.App;
 }
 
 export default Firebase;

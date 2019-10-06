@@ -1,7 +1,7 @@
-import React from 'react';
+import React from "react";
 
-import styled from 'styled-components';
-import LogInCard from '../../containers/Auth/LogInCard';
+import styled from "styled-components";
+import LogInCard from "../../containers/Auth/LogInCard";
 
 const LogInPageContainer = styled.div`
   background-color: #045de9;
@@ -14,6 +14,6 @@ const LogInPage: React.FC = () => {
       <LogInCard />
     </LogInPageContainer>
   );
-}
+};
 
 export default LogInPage;

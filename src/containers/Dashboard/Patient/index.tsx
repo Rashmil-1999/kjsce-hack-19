@@ -4,13 +4,13 @@ import Form from './Form';
 import Info from './Info';
 
 const PatientPage: React.FC = () => {
-  const [current, setCurrentToken] = useState<number | string | undefined>();
+  const [current, setCurrentToken] = useState<string | undefined>();
 
-  if(!!current) {
+  if(!current) {
     return <Form onSubmit={setCurrentToken} />;
   }
 
-  return <Info />;
+  return <Info currentPerson={current} />;
 };
 
 export default PatientPage;

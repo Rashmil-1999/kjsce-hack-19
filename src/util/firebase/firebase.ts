@@ -16,4 +16,10 @@ const config = {
 
 const app = firebase.initializeApp(config);
 
+app.auth().useDeviceLanguage();
+
+(window as any).recaptchaVerifier = new firebase.auth.RecaptchaVerifier('recaptcha-container', {
+    'size': 'invisible',
+});
+
 export default app;

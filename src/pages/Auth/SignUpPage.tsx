@@ -1,7 +1,7 @@
-import React from 'react';
+import React from "react";
 
-import styled from 'styled-components';
-import SignUpCard from '../../containers/Auth/SignUpCard';
+import styled from "styled-components";
+import SignUpCard from "../../containers/Auth/SignUpCard";
 
 const SignUpPageContainer = styled.div`
   background-color #ee9617;
@@ -14,6 +14,6 @@ const SignUpPage: React.FC = () => {
       <SignUpCard />
     </SignUpPageContainer>
   );
-}
+};
 
 export default SignUpPage;
