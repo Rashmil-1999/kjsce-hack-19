@@ -184,8 +184,8 @@ const PrescriptionModal: React.FC<ModalProps> = props => {
       firebase.firestore()
       .collection("Prescription")
       .add({
-        DocId: user.phoneNumber,
-        UserId: "+91" + (props as any).patient.phone,
+        docId: user.phoneNumber,
+        userId: "+91" + (props as any).patient.phone,
         medicines,
       });
     }
