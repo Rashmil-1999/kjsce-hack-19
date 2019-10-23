@@ -1,44 +1,71 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Doktor
+##### KJSCE Hacka 2019
+> Beautiful Queuing App
 
-## Available Scripts
+## Build instructions
 
-In the project directory, you can run:
+Install all packages using `npm install` or `yarn install`.
 
-### `yarn start`
+To run the server, `npm start` or `yarn start`.
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+To build the webpack, `npm run build` or `yarn build`.
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+Note: I do not have the repositories for YOLOv3 or React Native.
 
-### `yarn test`
+## Solution technology Stack
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+1. Firebase for backend.
+2. React for frontend.
+3. React Native for app.
+4. Flask microservice for YOLOv3.
 
-### `yarn build`
+## Developer
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+> Team Paneer Butter Masala.
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+It was built by 4 developers in 24 hours, from 12PM on October 5 to 12PM on October 6, 2019.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+> Vikrant Gajria – React
+> [github.com/vixrant](https://github.com/vixrant)
 
-### `yarn eject`
+> Rushabh Shroff – React Native
+> [github.com/Rushabhshroff](https://github.com/Rushabhshroff)
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+> Yash Javeri - React Native
+> [github.com/YashJaveri](https://github.com/YashJaveri)
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+> Rashmil Panchani - React, ML
+> [github.com/Rashmil-1999](https://github.com/Rashmil-1999)
 
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+## Contributing
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+1. Fork it (<https://github.com/vixrant/kjsce-hack-19/fork>)
+2. Create your feature branch (`git checkout -b feature/fooBar`)
+3. Commit your changes (`git commit -m 'Add some fooBar'`)
+4. Push to the branch (`git push origin feature/fooBar`)
+5. Create a new Pull Request
 
-## Learn More
+## Failures
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+> As with all my hackathon projects, I include a [FAILURES.md](/FAILURES.md)
+> which includes all the obstacles that I encountered while developing this project.
+> This project was successful. 
+> But that doesn't mean I ignore the small mistakes that I made along the way.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+--------------
+APGLv3 LICENSE
+--------------
+
+> Copyright (C) 2019 Vikrant Gajria
+>
+> This program is free software: you can redistribute it and/or modify
+> it under the terms of the GNU Affero General Public License as published
+> by the Free Software Foundation, either version 3 of the License, or
+> (at your option) any later version.
+> This program is distributed in the hope that it will be useful,
+> but WITHOUT ANY WARRANTY; without even the implied warranty of
+> MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+> GNU Affero General Public License for more details.
+>
+> You should have received a copy of the GNU Affero General Public License
+> along with this program.  If not, see <https://www.gnu.org/licenses/>.
